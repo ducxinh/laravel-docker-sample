@@ -1,34 +1,65 @@
-# Kozocom Laravel Template
+# Getting started
 
-## Versions
-PHP: 8.2
-NodeJS: >=18.0
+## Version
+- Laravel: v10.34.2
+- PHP: 8.2
+- NodeJS: >=18
+- MySQL: 8.0
+- Nginx
 
+## Requirement
+- Docker
 
-## Clone source code
+## Setup Docker
 ```bash
-git clone ...
-```
-
-## Installing
-```bash
-cd kz-laravel-template/docker
+cd docker
 cp .env.example .env
+cp workspace/auth.example.json workspace/auth.json
 
-sudo docker compose up -d workspace nginx php-fpm mysql phpmyadmin
+docker compose up -d workspace nginx php-fpm mysql phpmyadmin
 ```
 
-## Setup Laravel
+## Installation
 ```bash
+cd docker
+
+# Access to workspace container
 sudo docker compose exec workspace bash
 
 composer install
-chmod -R 777 storage
+
 cp .env.example .env
+
+# Generate application key
 php artisan key:generate
+
+# Run database migration
 php artisan migrate
+
+# Run database seeder
 php artisan db:seed
 ```
 
+## Frontend
+```bash
+npm install
+npm run dev
+
+# Build
+npm run build
+```
+
+## Unit test
+```bash
+php artisan test
+```
+
+## Format code
+```bash
+./vendor/bin/pint
+./vendor/bin/pint --dirty
+```
+
+
 ## Demo
-Open browser and navigate to `http://localhost:80`
+Open browser and navigate to `http://localhost:8000`
